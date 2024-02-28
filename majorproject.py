@@ -83,6 +83,40 @@ def admin_login():
         return render_template('error.html', message="Incorrect Email or Password ")
 
 
+@web_app.route("/register-doctor", methods=['POST'])
+def register_doctor():
+    doctor_data = {
+        'name': request.form['name'],
+        'email': request.form['email'],
+        'gender': request.form['gender'],
+        'specialization': request.form['specialization'],
+        'fee': request.form['fee'],
+        'password': hashlib.sha256(request.form['password'].encode('utf-8')).hexdigest(),
+    }
+
+    db = MongoDBHelper(collection="doctor-hospital")
+    db.insert(doctor_data)
+
+    return "Doctor registered successfully!"
+
+
+@web_app.route("/login-doctor", methods=['POST'])
+def login_doctor():
+    login_doctor_data = {
+        'email': request.form['email'],
+        'password': hashlib.sha256(request.form['password'].encode('utf-8')).hexdigest(),
+    }
+    print(login_doctor_data)
+
+    db = MongoDBHelper(collection="doctor-hospital")
+    documents = list(db.fetch(login_doctor_data))
+    if len(documents) == 1:
+        session['email'] = documents[0]['email']
+        print(vars(session))
+        return "doctor login successful"
+    else:
+        return render_template('error.html', message="Incorrect Email And Password ")
+
 
 if __name__ == "__main__":
     web_app.run(port=5000)

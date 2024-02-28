@@ -118,16 +118,16 @@
           <div class="tab-pane mt-4 mb-4 fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
             tabindex="0">
             <h3 class="mb-5 text-center">Login as Doctor</h3>
-            <form>
+            <form action="/login-doctor" method="post">
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
+                <input type="email" id="form3Example3" class="form-control" name="email" />
                 <label class="form-label" for="form3Example3">
                   <p>Email address</p>
                 </label>
               </div>
 
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
+                <input type="password" id="form3Example4" class="form-control" name="password"/>
                 <label class="form-label" for="form3Example4">
                   <p>Password</p>
                 </label>
@@ -166,7 +166,7 @@
 
       <div class="d-flex col-lg-7 justify-content-center align-items-center text-center mt-4">
         <div>
-          <img src="images/Screenshot_2024-02-07_201124-removebg-preview.png" alt="" width="150px">
+          <img src="static/Screenshot_2024-02-07_201124-removebg-preview.png" alt="" width="150px">
           <h1 class="mt-4">Welcome</h1>
         </div>
       </div>
