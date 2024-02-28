@@ -32,6 +32,7 @@ def register_patient():
         'last_name': request.form['last_name'],
         'contact': request.form['contact'],
         'email': request.form['email'],
+        'gender': request.form['gender'],
         'password': hashlib.sha256(request.form['password'].encode('utf-8')).hexdigest(),
         'createdOn': datetime.datetime.today()
     }
@@ -73,15 +74,12 @@ def admin_login():
     entered_email = request.form.get('email')
     entered_password = request.form.get('password')
 
-    # Hardcoded admin credentials
-    ADMIN_EMAIL = "admin@example.com"
-    ADMIN_PASSWORD = "admin123"
+    admin_email = "admin@example.com"
+    admin_password = "admin123"
 
-    if entered_email == ADMIN_EMAIL and entered_password == ADMIN_PASSWORD:
-        # If the entered credentials match, render the patient dashboard template
+    if entered_email == admin_email and entered_password == admin_password:
         return render_template('admin-home.html')
     else:
-        # If the credentials don't match, render the error template
         return render_template('error.html', message="Incorrect Email or Password ")
 
 
